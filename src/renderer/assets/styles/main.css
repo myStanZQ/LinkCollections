@@ -1,0 +1,187 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#app {
+  width: 100%;
+  height: 100vh;
+}
+
+html.dark {
+  --el-bg-color: #141414;
+  --el-bg-color-page: #0a0a0a;
+  --el-text-color-primary: #E5EAF3;
+  --el-text-color-regular: #CFD3DC;
+  --el-text-color-secondary: #A3A6AD;
+  --el-border-color: #4C4D4F;
+  --el-fill-color: #2C2C2C;
+  --el-fill-color-light: #363637;
+  --el-fill-color-lighter: #414243;
+  --el-fill-color-darker: #262727;
+  --el-fill-color-dark: #1F1F1F;
+  --el-color-primary: #409EFF;
+  --el-color-primary-light-9: #ecf5ff;
+  --el-color-success: #67C23A;
+  --el-color-warning: #E6A23C;
+  --el-color-danger: #F56C6C;
+  --el-color-info: #909399;
+}
+
+html.dark .min-h-screen.bg-gray-50,
+html.dark body {
+  background-color: #0a0a0a !important;
+}
+
+html.dark .card-view,
+html.dark .list-view,
+html.dark .stats-view,
+html.dark .settings-view,
+html.dark .main-content {
+  background-color: #0a0a0a !important;
+}
+
+html.dark .sidebar {
+  background-color: #1F1F1F !important;
+}
+
+html.dark .sidebar-footer,
+html.dark .sidebar-content {
+  border-color: #4C4D4F;
+}
+
+html.dark .card-grid,
+html.dark .stats-cards,
+html.dark .stats-charts,
+html.dark .stats-lists {
+  background-color: transparent;
+}
+
+html.dark .bookmark-card,
+html.dark .stat-card,
+html.dark .chart-section,
+html.dark .list-section,
+html.dark .settings-section {
+  background-color: #1F1F1F !important;
+  color: #E5EAF3 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+html.dark .settings-item-label,
+html.dark .settings-item-description {
+  color: #E5EAF3 !important;
+}
+
+html.dark .settings-item-description {
+  color: #A3A6AD !important;
+}
+
+html.dark .section-title {
+  color: #E5EAF3 !important;
+  border-color: #4C4D4F !important;
+}
+
+html.dark .stats-title {
+  color: #E5EAF3 !important;
+}
+
+html.dark .footer-btn,
+html.dark .logo,
+html.dark .title {
+  color: #E5EAF3 !important;
+}
+
+html.dark .min-h-screen.bg-gray-50,
+html.dark #app,
+html.dark body,
+html.dark html {
+  background-color: #0a0a0a !important;
+}
+
+html.dark .app-container,
+html.dark .main-content {
+  background-color: #0a0a0a !important;
+}
+
+html.dark .content-wrapper {
+  background-color: #141414 !important;
+}
+
+html.dark .bg-gray-50,
+html.dark .bg-white {
+  background-color: #141414 !important;
+}
+
+html.dark .settings-footer {
+  background-color: #1F1F1F !important;
+  border-color: #4C4D4F !important;
+}
+
+html.dark .el-button {
+  background-color: #2C2C2C !important;
+  border-color: #4C4D4F !important;
+  color: #E5EAF3 !important;
+}
+
+html.dark .el-button:hover {
+  background-color: #363637 !important;
+}
+
+html.dark .el-button--primary {
+  background-color: #409EFF !important;
+  border-color: #409EFF !important;
+  color: #ffffff !important;
+}
+
+html.dark .el-button--primary:hover {
+  background-color: #66b1ff !important;
+}
+
+html.dark .el-input__wrapper {
+  background-color: #2C2C2C !important;
+  box-shadow: 0 0 0 1px #4C4D4F inset !important;
+}
+
+html.dark .el-input__inner {
+  background-color: transparent !important;
+  color: #E5EAF3 !important;
+}
+
+html.dark .el-input__inner::placeholder {
+  color: #A3A6AD !important;
+}
+
+html.dark .el-table__body {
+  background-color: #141414 !important;
+}
+
+html.dark .el-table__cell {
+  background-color: #141414 !important;
+  color: #E5EAF3 !important;
+}
+
+html.dark .el-table__cell.el-table-fixed-column--right {
+  background-color: #141414 !important;
+}
+
+html.light {
+  --el-bg-color: #ffffff;
+  --el-bg-color-page: #f5f7fa;
+  --el-text-color-primary: #303133;
+  --el-text-color-regular: #606266;
+  --el-text-color-secondary: #909399;
+  --el-border-color: #dcdfe6;
+  --el-fill-color: #f0f2f5;
+  --el-fill-color-light: #f5f7fa;
+  --el-fill-color-lighter: #fafbfc;
+  --el-fill-color-darker: #e9e9eb;
+  --el-fill-color-dark: #dcdfe6;
+}

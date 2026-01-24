@@ -1,0 +1,83 @@
+{
+  "name": "link-collection",
+  "version": "1.0.0",
+  "description": "A bookmark manager application",
+  "main": "dist-electron/main.js",
+  "author": "",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev:electron",
+    "dev:electron": "electron-vite dev",
+    "dev:web": "vite",
+    "build": "npm run build:electron",
+    "build:electron": "electron-vite build",
+    "build:web": "vite build",
+    "preview": "vite preview",
+    "type-check": "vue-tsc --noEmit",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "format": "prettier --write src/",
+    "build:win": "npm run build && electron-builder --win"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "@types/lodash-es": "^4.17.12",
+    "echarts": "^5.4.3",
+    "element-plus": "^2.5.0",
+    "lodash-es": "^4.17.22",
+    "node-vibrant": "^3.1.6",
+    "pinia": "^2.1.7",
+    "uuid": "^9.0.1",
+    "vue": "^3.4.0",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "@iconify-json/heroicons": "^1.1.14",
+    "@types/uuid": "^9.0.8",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vitejs/plugin-vue": "^5.0.0",
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1",
+    "electron-vite": "^2.0.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-vue": "^9.19.2",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3",
+    "unocss": "^0.58.0",
+    "vite": "^5.0.0",
+    "vite-plugin-electron": "^0.28.0",
+    "vite-plugin-electron-renderer": "^0.14.5",
+    "vue-tsc": "^3.2.2"
+  },
+  "build": {
+    "appId": "com.linkcollection.app",
+    "productName": "LinkCollection",
+    "directories": {
+      "output": "release/${version}"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "package.json"
+    ],
+    "extraMetadata": {
+      "main": "dist-electron/main.js"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "public/icons/icon.ico",
+      "sign": null,
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}
