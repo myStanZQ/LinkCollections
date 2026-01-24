@@ -69,7 +69,7 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/yourusername/LinkCollections.git
+git clone https://gitcode.com/EthanCheung/LinkCollections
 cd LinkCollections
 
 # 安装依赖
@@ -301,10 +301,10 @@ LinkCollections/
 
 ## 📮 联系方式
 
-- **作者**: Your Name
-- **邮箱**: your.email@example.com
-- **项目地址**: [https://github.com/yourusername/LinkCollections](https://github.com/yourusername/LinkCollections)
-- **问题反馈**: [Issues](https://github.com/yourusername/LinkCollections/issues)
+- **作者**: Ethan Cheung
+- **邮箱**: nirvana.zq@petalmail.com
+- **项目地址**: [https://gitcode.com/EthanCheung/LinkCollections](https://gitcode.com/EthanCheung/LinkCollections)
+- **问题反馈**: [Issues](https://gitcode.com/EthanCheung/LinkCollections/issues)
 
 ---
 
@@ -312,6 +312,6 @@ LinkCollections/
 
 **如果这个项目对你有帮助，请给它一个 ⭐️**
 
-Made with ❤️ by Your Name
+Made with ❤️ by Ethan Cheung
 
 </div>
