@@ -315,3 +315,39 @@ LinkCollections/
 Made with ❤️ by Ethan Cheung
 
 </div>
+
+---
+
+<div align="center">
+
+## ☕ Buy Me a Coffee
+
+如果这个项目对你有帮助，不妨请我喝杯咖啡！你的支持是我持续更新的动力 😊
+
+</div>
+
+<br>
+
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center" style="padding: 20px; border: none;">
+      <img src="https://raw.gitcode.com/EthanCheung/ImageGallery/raw/main/alipay.jpg" alt="支付宝" width="200" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+      <br>
+      <strong style="font-size: 16px; margin-top: 10px; display: block;">支付宝</strong>
+    </td>
+  </tr>
+</table>
+
+<p align="center" style="margin-top: 20px;">
+  <strong>感谢您的支持！</strong> 💜
+</p>
+
+<p align="center" style="font-size: 12px; color: #666; margin-top: 10px;">
+  （微信打赏功能即将上线...）
+</p>
+
+</div>
+
+---
