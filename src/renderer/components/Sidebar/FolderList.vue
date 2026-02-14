@@ -1,12 +1,14 @@
 <template>
   <div class="folder-list">
     <div class="folder-list-header">
-      <h3 class="text-sm font-semibold text-gray-600">Folders</h3>
+      <h3 class="text-sm font-semibold text-gray-600">
+        Folders
+      </h3>
       <el-button
         size="small"
         text
-        @click="showAddFolderDialog = true"
         class="add-btn"
+        @click="showAddFolderDialog = true"
       >
         <i class="i-heroicons-plus" />
       </el-button>
@@ -22,7 +24,10 @@
         @contextmenu.prevent="handleContextMenu($event, folder)"
       >
         <div class="folder-item-content">
-          <div class="folder-icon-wrapper" :style="{ backgroundColor: folder.color || '#3B82F6' }">
+          <div
+            class="folder-icon-wrapper"
+            :style="{ backgroundColor: folder.color || '#3B82F6' }"
+          >
             <i class="i-heroicons-folder" />
           </div>
           <span class="folder-name">{{ folder.name }}</span>
@@ -31,7 +36,10 @@
           trigger="click"
           @command="(command: string) => handleFolderAction(command, folder.id)"
         >
-          <span class="folder-actions" @click.stop>
+          <span
+            class="folder-actions"
+            @click.stop
+          >
             <i class="i-heroicons-ellipsis-vertical" />
           </span>
           <template #dropdown>
@@ -47,7 +55,11 @@
     </div>
 
     <AddFolderDialog v-model="showAddFolderDialog" />
-    <EditFolderDialog v-model="showEditFolderDialog" :folder="editingFolder" @updated="handleFolderUpdate" />
+    <EditFolderDialog
+      v-model="showEditFolderDialog"
+      :folder="editingFolder"
+      @updated="handleFolderUpdate"
+    />
 
     <teleport to="body">
       <div
@@ -56,11 +68,17 @@
         :style="{ left: contextMenuPosition.x + 'px', top: contextMenuPosition.y + 'px' }"
         @click.stop
       >
-        <div class="context-menu-item" @click="handleFolderAction('edit', contextMenuFolder.id)">
+        <div
+          class="context-menu-item"
+          @click="handleFolderAction('edit', contextMenuFolder.id)"
+        >
           <i class="i-heroicons-pencil" />
           <span>Edit</span>
         </div>
-        <div class="context-menu-item" @click="handleFolderAction('delete', contextMenuFolder.id)">
+        <div
+          class="context-menu-item"
+          @click="handleFolderAction('delete', contextMenuFolder.id)"
+        >
           <i class="i-heroicons-trash" />
           <span>Delete</span>
         </div>

@@ -4,8 +4,8 @@
       v-model="searchQuery"
       placeholder="Search bookmarks..."
       clearable
-      @input="handleSearch"
       class="search-input"
+      @input="handleSearch"
     >
       <template #prefix>
         <i class="i-heroicons-magnifying-glass" />

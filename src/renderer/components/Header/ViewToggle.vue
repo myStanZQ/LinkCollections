@@ -2,15 +2,15 @@
   <el-button-group class="view-toggle">
     <el-button
       :type="currentView === 'card' ? 'primary' : ''"
-      @click="handleViewChange('card')"
       class="view-btn"
+      @click="handleViewChange('card')"
     >
       <i class="i-heroicons-squares-2x2" />
     </el-button>
     <el-button
       :type="currentView === 'list' ? 'primary' : ''"
-      @click="handleViewChange('list')"
       class="view-btn"
+      @click="handleViewChange('list')"
     >
       <i class="i-heroicons-list-bullet" />
     </el-button>

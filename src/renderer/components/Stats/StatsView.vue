@@ -1,6 +1,8 @@
 <template>
   <div class="stats-view">
-    <h1 class="stats-title">Statistics</h1>
+    <h1 class="stats-title">
+      Statistics
+    </h1>
 
     <div class="stats-cards">
       <div class="stat-card">
@@ -8,8 +10,12 @@
           <i class="i-heroicons-bookmark" />
         </div>
         <div class="stat-content">
-          <div class="stat-value">{{ totalBookmarks }}</div>
-          <div class="stat-label">Total Bookmarks</div>
+          <div class="stat-value">
+            {{ totalBookmarks }}
+          </div>
+          <div class="stat-label">
+            Total Bookmarks
+          </div>
         </div>
       </div>
 
@@ -18,8 +24,12 @@
           <i class="i-heroicons-folder" />
         </div>
         <div class="stat-content">
-          <div class="stat-value">{{ totalFolders }}</div>
-          <div class="stat-label">Folders</div>
+          <div class="stat-value">
+            {{ totalFolders }}
+          </div>
+          <div class="stat-label">
+            Folders
+          </div>
         </div>
       </div>
 
@@ -28,8 +38,12 @@
           <i class="i-heroicons-tag" />
         </div>
         <div class="stat-content">
-          <div class="stat-value">{{ totalTags }}</div>
-          <div class="stat-label">Tags</div>
+          <div class="stat-value">
+            {{ totalTags }}
+          </div>
+          <div class="stat-label">
+            Tags
+          </div>
         </div>
       </div>
 
@@ -38,55 +52,99 @@
           <i class="i-heroicons-chart-bar" />
         </div>
         <div class="stat-content">
-          <div class="stat-value">{{ totalVisits }}</div>
-          <div class="stat-label">Total Visits</div>
+          <div class="stat-value">
+            {{ totalVisits }}
+          </div>
+          <div class="stat-label">
+            Total Visits
+          </div>
         </div>
       </div>
     </div>
 
     <div class="stats-charts">
       <div class="chart-section">
-        <h2 class="section-title">Bookmarks by Folder</h2>
-        <div ref="folderChartRef" class="chart-container"></div>
+        <h2 class="section-title">
+          Bookmarks by Folder
+        </h2>
+        <div
+          ref="folderChartRef"
+          class="chart-container"
+        />
       </div>
 
       <div class="chart-section">
-        <h2 class="section-title">Bookmarks by Tag</h2>
-        <div ref="tagChartRef" class="chart-container"></div>
+        <h2 class="section-title">
+          Bookmarks by Tag
+        </h2>
+        <div
+          ref="tagChartRef"
+          class="chart-container"
+        />
       </div>
     </div>
 
     <div class="stats-lists">
       <div class="list-section">
-        <h2 class="section-title">Most Visited</h2>
+        <h2 class="section-title">
+          Most Visited
+        </h2>
         <div class="list-items">
-          <div v-for="bookmark in mostVisitedBookmarks" :key="bookmark.id" class="list-item">
+          <div
+            v-for="bookmark in mostVisitedBookmarks"
+            :key="bookmark.id"
+            class="list-item"
+          >
             <div class="list-item-content">
-              <div class="list-item-title">{{ bookmark.title }}</div>
-              <div class="list-item-url">{{ bookmark.url }}</div>
+              <div class="list-item-title">
+                {{ bookmark.title }}
+              </div>
+              <div class="list-item-url">
+                {{ bookmark.url }}
+              </div>
             </div>
             <div class="list-item-count">
               <i class="i-heroicons-chart-bar" />
               {{ bookmark.visitCount || 0 }}
             </div>
           </div>
-          <div v-if="mostVisitedBookmarks.length === 0" class="empty-list">No visit data yet</div>
+          <div
+            v-if="mostVisitedBookmarks.length === 0"
+            class="empty-list"
+          >
+            No visit data yet
+          </div>
         </div>
       </div>
 
       <div class="list-section">
-        <h2 class="section-title">Recently Added</h2>
+        <h2 class="section-title">
+          Recently Added
+        </h2>
         <div class="list-items">
-          <div v-for="bookmark in recentlyAddedBookmarks" :key="bookmark.id" class="list-item">
+          <div
+            v-for="bookmark in recentlyAddedBookmarks"
+            :key="bookmark.id"
+            class="list-item"
+          >
             <div class="list-item-content">
-              <div class="list-item-title">{{ bookmark.title }}</div>
-              <div class="list-item-url">{{ bookmark.url }}</div>
+              <div class="list-item-title">
+                {{ bookmark.title }}
+              </div>
+              <div class="list-item-url">
+                {{ bookmark.url }}
+              </div>
             </div>
             <div class="list-item-date">
               {{ formatDate(bookmark.createdAt) }}
             </div>
           </div>
-          <div v-if="recentlyAddedBookmarks.length === 0" class="empty-list">No bookmarks yet</div>
+          <div
+            v-if="recentlyAddedBookmarks.length === 0"
+            class="empty-list"
+          >
+            No bookmarks yet
+          </div>
         </div>
       </div>
     </div>

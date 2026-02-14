@@ -1,16 +1,25 @@
 <template>
   <div class="card-view">
-    <div v-if="filteredBookmarks.length === 0" class="empty-state">
-      <i class="i-heroicons-bookmark text-6xl text-gray-300"></i>
+    <div
+      v-if="filteredBookmarks.length === 0"
+      class="empty-state"
+    >
+      <i class="i-heroicons-bookmark text-6xl text-gray-300" />
       <p class="text-gray-500">
         {{ searchQuery ? 'No bookmarks match your search.' : 'No bookmarks in this folder.' }}
       </p>
-      <p v-if="!searchQuery" class="text-gray-400 text-sm mt-2">
+      <p
+        v-if="!searchQuery"
+        class="text-gray-400 text-sm mt-2"
+      >
         Add a bookmark using button above
       </p>
     </div>
 
-    <div v-else class="card-grid">
+    <div
+      v-else
+      class="card-grid"
+    >
       <BookmarkCard
         v-for="bookmark in filteredBookmarks"
         :key="bookmark.id"
@@ -20,7 +29,10 @@
       />
     </div>
 
-    <EditDialog v-model="editDialogVisible" :bookmark="editingBookmark" />
+    <EditDialog
+      v-model="editDialogVisible"
+      :bookmark="editingBookmark"
+    />
   </div>
 </template>
 

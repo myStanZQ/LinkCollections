@@ -1,5 +1,21 @@
 import type { Bookmark, Folder, Tag, Settings } from './index'
 
+export interface ExportResult {
+  success: boolean
+  canceled?: boolean
+  filePath?: string
+}
+
+export interface ImportResult {
+  success: boolean
+  canceled?: boolean
+  imported: {
+    bookmarks: number
+    folders: number
+    tags: number
+  }
+}
+
 export interface ElectronAPI {
   openBrowser: (url: string, browserPath?: string) => Promise<void>
   getBookmarks: () => Promise<Bookmark[]>
@@ -19,6 +35,8 @@ export interface ElectronAPI {
   clearAllTags: () => Promise<boolean>
   getSettings: () => Promise<Settings>
   updateSettings: (settings: Partial<Settings>) => Promise<Settings>
+  exportData: (format: 'json' | 'html') => Promise<ExportResult>
+  importData: (format: 'json' | 'html', mergeMode: 'replace' | 'merge') => Promise<ImportResult>
 }
 
 declare global {

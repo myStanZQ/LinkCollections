@@ -1,15 +1,25 @@
 <template>
-  <div class="bookmark-card" :style="{ background: cardGradient }">
+  <div
+    class="bookmark-card"
+    :style="{ background: cardGradient }"
+  >
     <div class="card-header">
-      <div class="favicon-wrapper" @click="refreshFavicon" title="Click to refresh favicon">
+      <div
+        class="favicon-wrapper"
+        title="Click to refresh favicon"
+        @click="refreshFavicon"
+      >
         <img
           v-if="bookmark.favicon"
           :src="bookmark.favicon"
           :alt="bookmark.title"
           class="favicon"
           @error="() => handleFaviconError(bookmark)"
+        >
+        <i
+          v-else
+          class="i-heroicons-globe-alt default-icon"
         />
-        <i v-else class="i-heroicons-globe-alt default-icon" />
       </div>
       <div class="last-visited">
         <span v-if="bookmark.lastVisited">{{ formatLastVisitedDate(bookmark.lastVisited) }}</span>
@@ -20,15 +30,26 @@
     <div class="card-body">
       <a
         :href="bookmark.url"
-        @click.prevent.stop="handleUrlClick"
         class="url-link"
+        @click.prevent.stop="handleUrlClick"
         v-html="highlightedUrl"
       />
-      <h3 class="title" @click.stop v-html="highlightedTitle"></h3>
-      <p class="description" @click.stop v-html="highlightedDescription"></p>
+      <h3
+        class="title"
+        @click.stop
+        v-html="highlightedTitle"
+      />
+      <p
+        class="description"
+        @click.stop
+        v-html="highlightedDescription"
+      />
     </div>
 
-    <div v-if="bookmarkTags.length > 0" class="card-tags">
+    <div
+      v-if="bookmarkTags.length > 0"
+      class="card-tags"
+    >
       <span
         v-for="tag in bookmarkTags"
         :key="tag.id"
@@ -40,14 +61,25 @@
       </span>
     </div>
 
-    <div class="card-footer" @click.stop>
+    <div
+      class="card-footer"
+      @click.stop
+    >
       <div class="visit-count">
         <i class="i-heroicons-chart-bar" />
         <span>{{ bookmark.visitCount }}</span>
       </div>
       <div class="actions">
-        <el-dropdown trigger="click" @command="handleMoreAction">
-          <el-button text size="small" class="action-btn" @click.stop>
+        <el-dropdown
+          trigger="click"
+          @command="handleMoreAction"
+        >
+          <el-button
+            text
+            size="small"
+            class="action-btn"
+            @click.stop
+          >
             <i class="i-heroicons-ellipsis-vertical" />
           </el-button>
           <template #dropdown>
@@ -60,7 +92,10 @@
                 <i class="i-heroicons-share mr-2" />
                 Share
               </el-dropdown-item>
-              <el-dropdown-item divided command="open-default">
+              <el-dropdown-item
+                divided
+                command="open-default"
+              >
                 <i class="i-heroicons-arrow-top-right-on-square mr-2" />
                 Open in Default Browser
               </el-dropdown-item>
@@ -72,7 +107,10 @@
                 <i class="i-heroicons-globe-alt mr-2" />
                 {{ browser.name || `Browser ${index + 1}` }}
               </el-dropdown-item>
-              <el-dropdown-item divided command="delete">
+              <el-dropdown-item
+                divided
+                command="delete"
+              >
                 <i class="i-heroicons-trash mr-2" />
                 Delete
               </el-dropdown-item>

@@ -1,16 +1,31 @@
 <template>
-  <el-dialog v-model="dialogVisible" title="Edit Bookmark" width="500px">
-    <el-form ref="formRef" :model="form" label-width="80px">
+  <el-dialog
+    v-model="dialogVisible"
+    title="Edit Bookmark"
+    width="500px"
+  >
+    <el-form
+      ref="formRef"
+      :model="form"
+      label-width="80px"
+    >
       <el-form-item label="Title">
         <el-input v-model="form.title" />
       </el-form-item>
 
       <el-form-item label="Description">
-        <el-input v-model="form.description" type="textarea" :rows="3" />
+        <el-input
+          v-model="form.description"
+          type="textarea"
+          :rows="3"
+        />
       </el-form-item>
 
       <el-form-item label="Folder">
-        <el-select v-model="form.folderId" style="width: 100%">
+        <el-select
+          v-model="form.folderId"
+          style="width: 100%"
+        >
           <el-option
             v-for="folder in folders"
             :key="folder.id"
@@ -21,8 +36,17 @@
       </el-form-item>
 
       <el-form-item label="Tags">
-        <el-select v-model="form.tags" multiple style="width: 100%">
-          <el-option v-for="tag in tags" :key="tag.id" :label="tag.name" :value="tag.id" />
+        <el-select
+          v-model="form.tags"
+          multiple
+          style="width: 100%"
+        >
+          <el-option
+            v-for="tag in tags"
+            :key="tag.id"
+            :label="tag.name"
+            :value="tag.id"
+          />
         </el-select>
       </el-form-item>
 
@@ -32,8 +56,15 @@
     </el-form>
 
     <template #footer>
-      <el-button @click="handleClose">Cancel</el-button>
-      <el-button type="primary" @click="handleSubmit">Save</el-button>
+      <el-button @click="handleClose">
+        Cancel
+      </el-button>
+      <el-button
+        type="primary"
+        @click="handleSubmit"
+      >
+        Save
+      </el-button>
     </template>
   </el-dialog>
 </template>

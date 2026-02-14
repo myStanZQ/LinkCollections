@@ -1,21 +1,50 @@
 <template>
-  <el-dialog v-model="dialogVisible" title="Add Bookmark" width="500px" @close="handleClose">
-    <el-form ref="formRef" :model="form" :rules="rules" label-width="80px">
-      <el-form-item label="URL" prop="url">
-        <el-input v-model="form.url" placeholder="https://example.com" @blur="fetchUrlMetadata">
+  <el-dialog
+    v-model="dialogVisible"
+    title="Add Bookmark"
+    width="500px"
+    @close="handleClose"
+  >
+    <el-form
+      ref="formRef"
+      :model="form"
+      :rules="rules"
+      label-width="80px"
+    >
+      <el-form-item
+        label="URL"
+        prop="url"
+      >
+        <el-input
+          v-model="form.url"
+          placeholder="https://example.com"
+          @blur="fetchUrlMetadata"
+        >
           <template #append>
-            <el-button @click="fetchUrlMetadata" :loading="fetching">
+            <el-button
+              :loading="fetching"
+              @click="fetchUrlMetadata"
+            >
               <i class="i-heroicons-arrow-path" />
             </el-button>
           </template>
         </el-input>
       </el-form-item>
 
-      <el-form-item label="Title" prop="title">
-        <el-input v-model="form.title" placeholder="Bookmark title" />
+      <el-form-item
+        label="Title"
+        prop="title"
+      >
+        <el-input
+          v-model="form.title"
+          placeholder="Bookmark title"
+        />
       </el-form-item>
 
-      <el-form-item label="Description" prop="description">
+      <el-form-item
+        label="Description"
+        prop="description"
+      >
         <el-input
           v-model="form.description"
           type="textarea"
@@ -24,8 +53,15 @@
         />
       </el-form-item>
 
-      <el-form-item label="Folder" prop="folderId">
-        <el-select v-model="form.folderId" placeholder="Select folder" style="width: 100%">
+      <el-form-item
+        label="Folder"
+        prop="folderId"
+      >
+        <el-select
+          v-model="form.folderId"
+          placeholder="Select folder"
+          style="width: 100%"
+        >
           <el-option
             v-for="folder in folders"
             :key="folder.id"
@@ -35,20 +71,42 @@
         </el-select>
       </el-form-item>
 
-      <el-form-item label="Tags" prop="tags">
-        <el-select v-model="form.tags" multiple placeholder="Select tags" style="width: 100%">
-          <el-option v-for="tag in tags" :key="tag.id" :label="tag.name" :value="tag.id">
+      <el-form-item
+        label="Tags"
+        prop="tags"
+      >
+        <el-select
+          v-model="form.tags"
+          multiple
+          placeholder="Select tags"
+          style="width: 100%"
+        >
+          <el-option
+            v-for="tag in tags"
+            :key="tag.id"
+            :label="tag.name"
+            :value="tag.id"
+          >
             <div class="tag-option">
-              <div class="tag-dot" :style="{ backgroundColor: tag.color }" />
+              <div
+                class="tag-dot"
+                :style="{ backgroundColor: tag.color }"
+              />
               <span>{{ tag.name }}</span>
             </div>
           </el-option>
         </el-select>
       </el-form-item>
 
-      <el-form-item label="Color" prop="color">
+      <el-form-item
+        label="Color"
+        prop="color"
+      >
         <div class="color-picker-wrapper">
-          <el-color-picker v-model="form.color" :predefine="predefineColors" />
+          <el-color-picker
+            v-model="form.color"
+            :predefine="predefineColors"
+          />
           <el-input
             v-model="form.color"
             placeholder="#3B82F6"
@@ -59,8 +117,14 @@
     </el-form>
 
     <template #footer>
-      <el-button @click="handleClose">Cancel</el-button>
-      <el-button type="primary" @click="handleSubmit" :loading="submitting">
+      <el-button @click="handleClose">
+        Cancel
+      </el-button>
+      <el-button
+        type="primary"
+        :loading="submitting"
+        @click="handleSubmit"
+      >
         Add Bookmark
       </el-button>
     </template>

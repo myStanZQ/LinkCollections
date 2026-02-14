@@ -1,5 +1,8 @@
 <template>
-  <div class="search-bar" :class="{ 'has-results': isSearching }">
+  <div
+    class="search-bar"
+    :class="{ 'has-results': isSearching }"
+  >
     <el-input
       ref="searchInput"
       v-model="searchQuery"
@@ -11,7 +14,10 @@
       @keydown.enter="handleEnter"
     >
       <template #append>
-        <el-tooltip content="Ctrl+K" placement="top">
+        <el-tooltip
+          content="Ctrl+K"
+          placement="top"
+        >
           <span class="shortcut-hint">⌘K</span>
         </el-tooltip>
       </template>

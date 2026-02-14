@@ -1,14 +1,29 @@
 <template>
-  <div v-if="isSearching" class="search-results">
-    <div v-if="searchResults.length === 0" class="no-results">
+  <div
+    v-if="isSearching"
+    class="search-results"
+  >
+    <div
+      v-if="searchResults.length === 0"
+      class="no-results"
+    >
       <i class="i-heroicons-magnifying-glass" />
       <p>No bookmarks found</p>
     </div>
 
-    <div v-else class="results-list">
+    <div
+      v-else
+      class="results-list"
+    >
       <div class="results-header">
         <span>{{ searchResults.length }} result{{ searchResults.length !== 1 ? 's' : '' }}</span>
-        <el-button text size="small" @click="handleClear"> Clear </el-button>
+        <el-button
+          text
+          size="small"
+          @click="handleClear"
+        >
+          Clear
+        </el-button>
       </div>
 
       <div
@@ -17,24 +32,47 @@
         class="result-item"
         @click="handleSelectBookmark(bookmark)"
       >
-        <div class="result-favicon" v-if="bookmark.favicon">
-          <img :src="bookmark.favicon" alt="" @error="handleFaviconError(bookmark)" />
+        <div
+          v-if="bookmark.favicon"
+          class="result-favicon"
+        >
+          <img
+            :src="bookmark.favicon"
+            alt=""
+            @error="handleFaviconError(bookmark)"
+          >
         </div>
-        <div class="result-favicon" v-else>
+        <div
+          v-else
+          class="result-favicon"
+        >
           <i class="i-heroicons-globe-alt" />
         </div>
 
         <div class="result-content">
-          <div class="result-title">{{ bookmark.title }}</div>
-          <div class="result-url">{{ bookmark.url }}</div>
+          <div class="result-title">
+            {{ bookmark.title }}
+          </div>
+          <div class="result-url">
+            {{ bookmark.url }}
+          </div>
         </div>
       </div>
     </div>
 
-    <div v-if="searchHistory.length > 0" class="search-history">
+    <div
+      v-if="searchHistory.length > 0"
+      class="search-history"
+    >
       <div class="history-header">
         <span>Recent searches</span>
-        <el-button text size="small" @click="handleClearHistory"> Clear all </el-button>
+        <el-button
+          text
+          size="small"
+          @click="handleClearHistory"
+        >
+          Clear all
+        </el-button>
       </div>
 
       <div
@@ -45,7 +83,12 @@
       >
         <i class="i-heroicons-clock" />
         <span>{{ item }}</span>
-        <el-button text size="small" class="remove-btn" @click.stop="handleRemoveHistory(item)">
+        <el-button
+          text
+          size="small"
+          class="remove-btn"
+          @click.stop="handleRemoveHistory(item)"
+        >
           <i class="i-heroicons-x-mark" />
         </el-button>
       </div>

@@ -4,20 +4,26 @@
     :class="{ collapsed: sidebarCollapsed }"
   >
     <div class="sidebar-header">
-      <div class="logo" v-if="!sidebarCollapsed">
+      <div
+        v-if="!sidebarCollapsed"
+        class="logo"
+      >
         <i class="i-heroicons-link" />
         <span>LinkCollection</span>
       </div>
       <el-button
         text
-        @click="toggleSidebar"
         class="collapse-btn"
+        @click="toggleSidebar"
       >
         <i :class="sidebarCollapsed ? 'i-heroicons-chevron-right' : 'i-heroicons-chevron-left'" />
       </el-button>
     </div>
 
-    <div class="sidebar-content" v-if="!sidebarCollapsed">
+    <div
+      v-if="!sidebarCollapsed"
+      class="sidebar-content"
+    >
       <SearchBar />
       <SearchResults />
       <FolderList />

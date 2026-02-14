@@ -5,6 +5,7 @@ import { registerBookmarkHandlers } from './ipc/bookmarks'
 import { registerFolderHandlers } from './ipc/folders'
 import { registerTagHandlers } from './ipc/tags'
 import { registerSettingsHandlers } from './ipc/settings'
+import { registerImportExportHandlers } from './ipc/import-export'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -100,6 +101,7 @@ app.whenReady().then(() => {
   registerFolderHandlers()
   registerTagHandlers()
   registerSettingsHandlers()
+  registerImportExportHandlers()
   createWindow()
 })
 

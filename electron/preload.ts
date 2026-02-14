@@ -21,5 +21,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
   deleteTag: (id: string) => ipcRenderer.invoke('delete-tag', id),
   clearAllTags: () => ipcRenderer.invoke('clearAllTags'),
   getSettings: () => ipcRenderer.invoke('get-settings'),
-  updateSettings: (settings: any) => ipcRenderer.invoke('update-settings', settings)
+  updateSettings: (settings: any) => ipcRenderer.invoke('update-settings', settings),
+  exportData: (format: 'json' | 'html') => ipcRenderer.invoke('export-data', format),
+  importData: (format: 'json' | 'html', mergeMode: 'replace' | 'merge') =>
+    ipcRenderer.invoke('import-data', format, mergeMode)
 })

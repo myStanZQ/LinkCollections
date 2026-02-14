@@ -1,12 +1,14 @@
 <template>
   <div class="tag-list">
     <div class="tag-list-header">
-      <h3 class="text-sm font-semibold text-gray-600">Tags</h3>
+      <h3 class="text-sm font-semibold text-gray-600">
+        Tags
+      </h3>
       <el-button
         size="small"
         text
-        @click="showAddTagDialog = true"
         class="add-btn"
+        @click="showAddTagDialog = true"
       >
         <i class="i-heroicons-plus" />
       </el-button>
@@ -21,13 +23,20 @@
         @click="handleTagClick(tag.id)"
         @contextmenu.prevent="handleContextMenu($event, tag)"
       >
-        <div class="tag-dot" :style="{ backgroundColor: tag.color }" />
+        <div
+          class="tag-dot"
+          :style="{ backgroundColor: tag.color }"
+        />
         <span class="tag-name">{{ tag.name }}</span>
       </div>
     </div>
 
     <AddTagDialog v-model="showAddTagDialog" />
-    <EditTagDialog v-model="showEditTagDialog" :tag="editingTag" @updated="handleTagUpdate" />
+    <EditTagDialog
+      v-model="showEditTagDialog"
+      :tag="editingTag"
+      @updated="handleTagUpdate"
+    />
 
     <teleport to="body">
       <div
@@ -36,11 +45,17 @@
         :style="{ left: contextMenuPosition.x + 'px', top: contextMenuPosition.y + 'px' }"
         @click.stop
       >
-        <div class="context-menu-item" @click="handleTagAction('edit', contextMenuTag.id)">
+        <div
+          class="context-menu-item"
+          @click="handleTagAction('edit', contextMenuTag.id)"
+        >
           <i class="i-heroicons-pencil" />
           <span>Edit</span>
         </div>
-        <div class="context-menu-item" @click="handleTagAction('delete', contextMenuTag.id)">
+        <div
+          class="context-menu-item"
+          @click="handleTagAction('delete', contextMenuTag.id)"
+        >
           <i class="i-heroicons-trash" />
           <span>Delete</span>
         </div>

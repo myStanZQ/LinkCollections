@@ -1,6 +1,8 @@
 <template>
   <div class="settings-view">
-    <h1 class="settings-title">Settings</h1>
+    <h1 class="settings-title">
+      Settings
+    </h1>
 
     <div class="settings-sections">
       <div class="settings-section">
@@ -10,18 +12,33 @@
         </h2>
         <div class="settings-item">
           <div class="settings-item-content">
-            <div class="settings-item-label">Theme</div>
-            <div class="settings-item-description">Choose your preferred theme</div>
+            <div class="settings-item-label">
+              Theme
+            </div>
+            <div class="settings-item-description">
+              Choose your preferred theme
+            </div>
           </div>
-          <el-radio-group v-model="localSettings.theme" @change="handleThemeChange">
-            <el-radio-button value="light">Light</el-radio-button>
-            <el-radio-button value="dark">Dark</el-radio-button>
+          <el-radio-group
+            v-model="localSettings.theme"
+            @change="handleThemeChange"
+          >
+            <el-radio-button value="light">
+              Light
+            </el-radio-button>
+            <el-radio-button value="dark">
+              Dark
+            </el-radio-button>
           </el-radio-group>
         </div>
         <div class="settings-item">
           <div class="settings-item-content">
-            <div class="settings-item-label">Language</div>
-            <div class="settings-item-description">Choose your preferred language</div>
+            <div class="settings-item-label">
+              Language
+            </div>
+            <div class="settings-item-description">
+              Choose your preferred language
+            </div>
           </div>
           <el-select
             v-model="localSettings.language"
@@ -29,8 +46,14 @@
             style="width: 180px"
             @change="handleLanguageChange"
           >
-            <el-option label="English" value="en" />
-            <el-option label="中文" value="zh" />
+            <el-option
+              label="English"
+              value="en"
+            />
+            <el-option
+              label="中文"
+              value="zh"
+            />
           </el-select>
         </div>
       </div>
@@ -42,11 +65,22 @@
         </h2>
         <div class="settings-item">
           <div class="settings-item-content">
-            <div class="settings-item-label">Default Browser</div>
-            <div class="settings-item-description">Primary browser for opening links</div>
+            <div class="settings-item-label">
+              Default Browser
+            </div>
+            <div class="settings-item-description">
+              Primary browser for opening links
+            </div>
           </div>
-          <div class="browser-inputs" style="width: 400px">
-            <el-input v-model="defaultBrowserName" placeholder="Browser name" style="flex: 1" />
+          <div
+            class="browser-inputs"
+            style="width: 400px"
+          >
+            <el-input
+              v-model="defaultBrowserName"
+              placeholder="Browser name"
+              style="flex: 1"
+            />
             <el-input
               v-model="defaultBrowserPath"
               placeholder="C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
@@ -57,8 +91,12 @@
         </div>
         <div class="settings-item">
           <div class="settings-item-content">
-            <div class="settings-item-label">Available Browsers</div>
-            <div class="settings-item-description">Additional browsers to choose from</div>
+            <div class="settings-item-label">
+              Available Browsers
+            </div>
+            <div class="settings-item-description">
+              Additional browsers to choose from
+            </div>
           </div>
           <div class="browser-list">
             <div
@@ -67,14 +105,30 @@
               class="browser-item"
             >
               <div class="browser-inputs">
-                <el-input v-model="browser.name" placeholder="Browser name" style="flex: 1" />
-                <el-input v-model="browser.path" placeholder="Browser path" style="flex: 2" />
+                <el-input
+                  v-model="browser.name"
+                  placeholder="Browser name"
+                  style="flex: 1"
+                />
+                <el-input
+                  v-model="browser.path"
+                  placeholder="Browser path"
+                  style="flex: 2"
+                />
               </div>
-              <el-button text type="danger" @click="removeBrowser(index)">
+              <el-button
+                text
+                type="danger"
+                @click="removeBrowser(index)"
+              >
                 <i class="i-heroicons-x-mark" />
               </el-button>
             </div>
-            <el-button text type="primary" @click="addBrowser">
+            <el-button
+              text
+              type="primary"
+              @click="addBrowser"
+            >
               <i class="i-heroicons-plus" />
               Add Browser
             </el-button>
@@ -89,12 +143,17 @@
         </h2>
         <div class="settings-item">
           <div class="settings-item-content">
-            <div class="settings-item-label">Auto-fetch Favicon</div>
+            <div class="settings-item-label">
+              Auto-fetch Favicon
+            </div>
             <div class="settings-item-description">
               Automatically fetch website icons when adding bookmarks
             </div>
           </div>
-          <el-switch v-model="localSettings.autoFetchIcon" @change="handleAutoFetchChange" />
+          <el-switch
+            v-model="localSettings.autoFetchIcon"
+            @change="handleAutoFetchChange"
+          />
         </div>
       </div>
 
@@ -105,11 +164,17 @@
         </h2>
         <div class="settings-item">
           <div class="settings-item-content">
-            <div class="settings-item-label">LinkCollection</div>
-            <div class="settings-item-description">Version 1.0.0</div>
+            <div class="settings-item-label">
+              LinkCollection
+            </div>
+            <div class="settings-item-description">
+              Version 1.0.0
+            </div>
           </div>
         </div>
       </div>
+
+      <ImportExport />
 
       <div class="settings-section">
         <h2 class="section-title">
@@ -118,17 +183,33 @@
         </h2>
         <div class="settings-item">
           <div class="settings-item-content">
-            <div class="settings-item-label">Clear All Data</div>
-            <div class="settings-item-description">Delete all bookmarks, folders, and tags</div>
+            <div class="settings-item-label">
+              Clear All Data
+            </div>
+            <div class="settings-item-description">
+              Delete all bookmarks, folders, and tags
+            </div>
           </div>
-          <el-button type="danger" @click="clearAllData">Clear All</el-button>
+          <el-button
+            type="danger"
+            @click="clearAllData"
+          >
+            Clear All
+          </el-button>
         </div>
       </div>
     </div>
 
     <div class="settings-footer">
-      <el-button @click="resetToDefaults">Reset to Defaults</el-button>
-      <el-button type="primary" @click="saveSettings">Save Settings</el-button>
+      <el-button @click="resetToDefaults">
+        Reset to Defaults
+      </el-button>
+      <el-button
+        type="primary"
+        @click="saveSettings"
+      >
+        Save Settings
+      </el-button>
     </div>
   </div>
 </template>
@@ -139,6 +220,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { storeToRefs } from 'pinia'
 import { useUIStore, useBookmarkStore, useFolderStore, useTagStore } from '../../stores'
 import type { Settings } from '../../types'
+import ImportExport from './ImportExport.vue'
 
 const uiStore = useUIStore()
 const bookmarkStore = useBookmarkStore()

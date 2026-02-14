@@ -11,14 +11,20 @@
       :rules="rules"
       label-width="80px"
     >
-      <el-form-item label="Name" prop="name">
+      <el-form-item
+        label="Name"
+        prop="name"
+      >
         <el-input
           v-model="form.name"
           placeholder="Enter tag name"
           @keyup.enter="handleSubmit"
         />
       </el-form-item>
-      <el-form-item label="Color" prop="color">
+      <el-form-item
+        label="Color"
+        prop="color"
+      >
         <div class="color-picker-wrapper">
           <el-color-picker
             v-model="form.color"
@@ -35,8 +41,13 @@
     </el-form>
 
     <template #footer>
-      <el-button @click="handleClose">Cancel</el-button>
-      <el-button type="primary" @click="handleSubmit">
+      <el-button @click="handleClose">
+        Cancel
+      </el-button>
+      <el-button
+        type="primary"
+        @click="handleSubmit"
+      >
         Save
       </el-button>
     </template>

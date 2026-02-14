@@ -1,7 +1,9 @@
 <template>
   <div class="header">
     <div class="header-left">
-      <h1 class="title">{{ currentFolder?.name || 'All Bookmarks' }}</h1>
+      <h1 class="title">
+        {{ currentFolder?.name || 'All Bookmarks' }}
+      </h1>
     </div>
 
     <div class="header-center">
@@ -9,7 +11,11 @@
     </div>
 
     <div class="header-right">
-      <el-button type="primary" @click="showAddDialog = true" class="add-btn">
+      <el-button
+        type="primary"
+        class="add-btn"
+        @click="showAddDialog = true"
+      >
         <i class="i-heroicons-plus" />
         Add Bookmark
       </el-button>

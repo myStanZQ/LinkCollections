@@ -2,10 +2,19 @@
   <div class="app-container">
     <Sidebar />
     <div class="main-content">
-      <div v-if="currentView === 'bookmarks'" class="bookmarks-view">
+      <div
+        v-if="currentView === 'bookmarks'"
+        class="bookmarks-view"
+      >
         <Header @search="handleSearch" />
-        <CardView v-if="viewMode === 'card'" :search-query="searchQuery" />
-        <ListView v-else :search-query="searchQuery" />
+        <CardView
+          v-if="viewMode === 'card'"
+          :search-query="searchQuery"
+        />
+        <ListView
+          v-else
+          :search-query="searchQuery"
+        />
       </div>
       <StatsView v-else-if="currentView === 'stats'" />
       <SettingsView v-else-if="currentView === 'settings'" />

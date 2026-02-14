@@ -11,7 +11,10 @@
       :rules="rules"
       label-width="80px"
     >
-      <el-form-item label="Name" prop="name">
+      <el-form-item
+        label="Name"
+        prop="name"
+      >
         <el-input
           v-model="form.name"
           placeholder="Enter folder name"
@@ -35,8 +38,13 @@
     </el-form>
 
     <template #footer>
-      <el-button @click="handleClose">Cancel</el-button>
-      <el-button type="primary" @click="handleSubmit">
+      <el-button @click="handleClose">
+        Cancel
+      </el-button>
+      <el-button
+        type="primary"
+        @click="handleSubmit"
+      >
         Save
       </el-button>
     </template>
