@@ -172,3 +172,5 @@ data/
 *.db
 *.sqlite
 *.sqlite3
+# BitFun snapshot data - auto managed
+.bitfun/
