@@ -2,7 +2,7 @@
   <div class="folder-list">
     <div class="folder-list-header">
       <h3 class="text-sm font-semibold text-gray-600">
-        Folders
+        {{ t('sidebar.folders') }}
       </h3>
       <el-button
         size="small"
@@ -46,7 +46,7 @@
             <el-dropdown-menu>
               <el-dropdown-item command="delete">
                 <i class="i-heroicons-trash mr-2" />
-                Delete
+                {{ t('common.delete') }}
               </el-dropdown-item>
             </el-dropdown-menu>
           </template>
@@ -73,14 +73,14 @@
           @click="handleFolderAction('edit', contextMenuFolder.id)"
         >
           <i class="i-heroicons-pencil" />
-          <span>Edit</span>
+          <span>{{ t('common.edit') }}</span>
         </div>
         <div
           class="context-menu-item"
           @click="handleFolderAction('delete', contextMenuFolder.id)"
         >
           <i class="i-heroicons-trash" />
-          <span>Delete</span>
+          <span>{{ t('common.delete') }}</span>
         </div>
       </div>
     </teleport>
@@ -90,11 +90,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
+import { useI18n } from 'vue-i18n'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { useFolderStore, useUIStore } from '../../stores'
-import { ElMessageBox } from 'element-plus'
 import AddFolderDialog from '../Modal/AddFolderDialog.vue'
 import EditFolderDialog from '../Modal/EditFolderDialog.vue'
 
+const { t } = useI18n()
 const folderStore = useFolderStore()
 const uiStore = useUIStore()
 const { folders, currentFolderId } = storeToRefs(folderStore)
@@ -159,7 +161,7 @@ const handleFolderUpdate = async (updates: any) => {
       await updateFolder(editingFolder.value.id, updates)
       showEditFolderDialog.value = false
     } catch (error) {
-      ElMessage.error('Failed to update folder')
+      ElMessage.error(t('message.folderAddFailed'))
     }
   }
 }

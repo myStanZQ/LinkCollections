@@ -153,10 +153,12 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import * as echarts from 'echarts'
 import { storeToRefs } from 'pinia'
 import { useBookmarkStore, useFolderStore, useTagStore } from '../../stores'
 
+const { t } = useI18n()
 const bookmarkStore = useBookmarkStore()
 const folderStore = useFolderStore()
 const tagStore = useTagStore()

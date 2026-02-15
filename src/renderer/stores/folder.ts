@@ -2,8 +2,10 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { Folder } from '../types'
 import { ElMessage } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 
 export const useFolderStore = defineStore('folder', () => {
+  const { t } = useI18n()
   const folders = ref<Folder[]>([])
   const currentFolderId = ref<string>('')
   const loading = ref(false)
@@ -16,7 +18,7 @@ export const useFolderStore = defineStore('folder', () => {
         currentFolderId.value = folders.value[0].id
       }
     } catch (error) {
-      ElMessage.error('Failed to load folders')
+      ElMessage.error(t('message.folderLoadFailed'))
       console.error(error)
     } finally {
       loading.value = false
@@ -32,10 +34,10 @@ export const useFolderStore = defineStore('folder', () => {
       }
       const newFolder = await window.electronAPI.addFolder(folderData)
       folders.value.push(newFolder)
-      ElMessage.success('Folder added successfully')
+      ElMessage.success(t('message.folderAdded'))
       return newFolder
     } catch (error) {
-      ElMessage.error('Failed to add folder')
+      ElMessage.error(t('message.folderAddFailed'))
       console.error(error)
       throw error
     }
@@ -48,9 +50,9 @@ export const useFolderStore = defineStore('folder', () => {
       if (currentFolderId.value === id) {
         currentFolderId.value = folders.value.length > 0 ? folders.value[0].id : ''
       }
-      ElMessage.success('Folder deleted successfully')
+      ElMessage.success(t('message.folderDeleted'))
     } catch (error) {
-      ElMessage.error('Failed to delete folder')
+      ElMessage.error(t('message.folderDeleteFailed'))
       console.error(error)
       throw error
     }
@@ -67,9 +69,9 @@ export const useFolderStore = defineStore('folder', () => {
       if (index > -1) {
         folders.value[index] = updatedFolder
       }
-      ElMessage.success('Folder updated successfully')
+      ElMessage.success(t('message.folderUpdated'))
     } catch (error) {
-      ElMessage.error('Failed to update folder')
+      ElMessage.error(t('message.folderAddFailed'))
       console.error(error)
       throw error
     }
@@ -84,9 +86,9 @@ export const useFolderStore = defineStore('folder', () => {
       await window.electronAPI.clearAllFolders()
       folders.value = []
       currentFolderId.value = ''
-      ElMessage.success('All folders cleared')
+      ElMessage.success(t('message.allCleared'))
     } catch (error) {
-      ElMessage.error('Failed to clear folders')
+      ElMessage.error(t('message.folderDeleteFailed'))
       throw error
     }
   }

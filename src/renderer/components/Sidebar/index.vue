@@ -9,7 +9,7 @@
         class="logo"
       >
         <i class="i-heroicons-link" />
-        <span>LinkCollection</span>
+        <span>{{ t('app.name') }}</span>
       </div>
       <el-button
         text
@@ -34,20 +34,20 @@
       <el-button
         text
         class="footer-btn left-btn"
-        title="Statistics"
+        :title="t('sidebar.statistics')"
         @click="handleStatsClick"
       >
         <i class="i-heroicons-chart-bar footer-icon" />
-        <span v-if="!sidebarCollapsed">Stats</span>
+        <span v-if="!sidebarCollapsed">{{ t('sidebar.statistics') }}</span>
       </el-button>
       <el-button
         text
         class="footer-btn right-btn"
-        title="Settings"
+        :title="t('sidebar.settings')"
         @click="handleSettingsClick"
       >
         <i class="i-heroicons-cog-6-tooth footer-icon" />
-        <span v-if="!sidebarCollapsed">Settings</span>
+        <span v-if="!sidebarCollapsed">{{ t('sidebar.settings') }}</span>
       </el-button>
     </div>
   </div>
@@ -55,12 +55,14 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import { useI18n } from 'vue-i18n'
 import { useUIStore } from '../../stores'
 import FolderList from './FolderList.vue'
 import TagList from './TagList.vue'
 import SearchBar from './SearchBar.vue'
 import SearchResults from './SearchResults.vue'
 
+const { t } = useI18n()
 const uiStore = useUIStore()
 const { sidebarCollapsed, currentView } = storeToRefs(uiStore)
 const { toggleSidebar, setCurrentView } = uiStore

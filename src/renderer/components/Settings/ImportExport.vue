@@ -2,7 +2,7 @@
   <div class="import-export-section">
     <h2 class="section-title">
       <i class="i-heroicons-arrow-up-down" />
-      Import / Export
+      {{ t('importExport.title') }}
     </h2>
 
     <div class="import-export-grid">
@@ -10,21 +10,21 @@
         <div class="action-icon">
           <i class="i-heroicons-arrow-down-tray" />
         </div>
-        <h3>Export Data</h3>
-        <p>Export all bookmarks, folders, and tags to a file</p>
+        <h3>{{ t('importExport.exportData') }}</h3>
+        <p>{{ t('importExport.exportData') }}</p>
         <div class="action-buttons">
           <el-button
             type="primary"
             :loading="exportingJson"
             @click="handleExportJson"
           >
-            Export as JSON
+            {{ t('importExport.jsonFormat') }}
           </el-button>
           <el-button
             :loading="exportingHtml"
             @click="handleExportHtml"
           >
-            Export as HTML
+            {{ t('importExport.htmlFormat') }}
           </el-button>
         </div>
       </div>
@@ -33,18 +33,18 @@
         <div class="action-icon">
           <i class="i-heroicons-arrow-up-tray" />
         </div>
-        <h3>Import Data</h3>
-        <p>Import bookmarks from a file</p>
+        <h3>{{ t('importExport.importData') }}</h3>
+        <p>{{ t('importExport.importData') }}</p>
         <div class="import-options">
           <el-radio-group
             v-model="importMergeMode"
             size="small"
           >
             <el-radio-button value="merge">
-              Merge
+              {{ t('importExport.merge') }}
             </el-radio-button>
             <el-radio-button value="replace">
-              Replace All
+              {{ t('importExport.replace') }}
             </el-radio-button>
           </el-radio-group>
         </div>
@@ -54,13 +54,13 @@
             :loading="importingJson"
             @click="handleImportJson"
           >
-            Import from JSON
+            {{ t('importExport.jsonFormat') }}
           </el-button>
           <el-button
             :loading="importingHtml"
             @click="handleImportHtml"
           >
-            Import from HTML
+            {{ t('importExport.htmlFormat') }}
           </el-button>
         </div>
       </div>
@@ -68,7 +68,7 @@
 
     <el-alert
       v-if="lastImportResult"
-      :title="`Import completed: ${lastImportResult.imported.bookmarks} bookmarks, ${lastImportResult.imported.folders} folders, ${lastImportResult.imported.tags} tags`"
+      :title="`${t('importExport.importSuccess')}: ${lastImportResult.imported.bookmarks} ${t('bookmark.title')}, ${lastImportResult.imported.folders} ${t('folder.title')}, ${lastImportResult.imported.tags} ${t('tag.title')}`"
       type="success"
       :closable="false"
       show-icon
@@ -79,10 +79,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
 import { useBookmarkStore, useFolderStore, useTagStore } from '../../stores'
 import type { ImportResult } from '../../types/import-export'
 
+const { t } = useI18n()
 const bookmarkStore = useBookmarkStore()
 const folderStore = useFolderStore()
 const tagStore = useTagStore()
@@ -101,12 +103,12 @@ const handleExportJson = async () => {
     exportingJson.value = true
     const result = await window.electronAPI.exportData('json')
     if (result.success) {
-      ElMessage.success(`Exported to: ${result.filePath}`)
+      ElMessage.success(`${t('importExport.exportSuccess')}: ${result.filePath}`)
     } else if (!result.canceled) {
-      ElMessage.error('Export failed')
+      ElMessage.error(t('importExport.exportFailed'))
     }
   } catch (error) {
-    ElMessage.error('Export failed')
+    ElMessage.error(t('importExport.exportFailed'))
     console.error(error)
   } finally {
     exportingJson.value = false
@@ -118,12 +120,12 @@ const handleExportHtml = async () => {
     exportingHtml.value = true
     const result = await window.electronAPI.exportData('html')
     if (result.success) {
-      ElMessage.success(`Exported to: ${result.filePath}`)
+      ElMessage.success(`${t('importExport.exportSuccess')}: ${result.filePath}`)
     } else if (!result.canceled) {
-      ElMessage.error('Export failed')
+      ElMessage.error(t('importExport.exportFailed'))
     }
   } catch (error) {
-    ElMessage.error('Export failed')
+    ElMessage.error(t('importExport.exportFailed'))
     console.error(error)
   } finally {
     exportingHtml.value = false
@@ -139,12 +141,12 @@ const handleImportJson = async () => {
       await bookmarkStore.fetchBookmarks()
       await folderStore.fetchFolders()
       await tagStore.fetchTags()
-      ElMessage.success('Import completed successfully')
+      ElMessage.success(t('importExport.importSuccess'))
     } else if (!result.canceled) {
-      ElMessage.error('Import failed')
+      ElMessage.error(t('importExport.importFailed'))
     }
   } catch (error) {
-    ElMessage.error('Import failed')
+    ElMessage.error(t('importExport.importFailed'))
     console.error(error)
   } finally {
     importingJson.value = false
@@ -159,12 +161,12 @@ const handleImportHtml = async () => {
       lastImportResult.value = result as ImportResult
       await bookmarkStore.fetchBookmarks()
       await folderStore.fetchFolders()
-      ElMessage.success('Import completed successfully')
+      ElMessage.success(t('importExport.importSuccess'))
     } else if (!result.canceled) {
-      ElMessage.error('Import failed')
+      ElMessage.error(t('importExport.importFailed'))
     }
   } catch (error) {
-    ElMessage.error('Import failed')
+    ElMessage.error(t('importExport.importFailed'))
     console.error(error)
   } finally {
     importingHtml.value = false

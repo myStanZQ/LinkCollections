@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     v-model="dialogVisible"
-    title="Edit Folder"
+    :title="t('dialog.editFolder')"
     width="400px"
     @close="handleClose"
   >
@@ -12,17 +12,17 @@
       label-width="80px"
     >
       <el-form-item
-        label="Name"
+        :label="t('form.folderName')"
         prop="name"
       >
         <el-input
           v-model="form.name"
-          placeholder="Enter folder name"
+          :placeholder="t('form.placeholder.folderName')"
           @keyup.enter="handleSubmit"
         />
       </el-form-item>
 
-      <el-form-item label="Color">
+      <el-form-item :label="t('form.color')">
         <div class="color-picker-wrapper">
           <el-color-picker
             v-model="form.color"
@@ -31,7 +31,7 @@
           <el-input
             v-model="form.color"
             placeholder="#3B82F6"
-            style="width: 120px; margin-left: 12px;"
+            style="width: 120px; margin-left: 12px"
           />
         </div>
       </el-form-item>
@@ -39,13 +39,13 @@
 
     <template #footer>
       <el-button @click="handleClose">
-        Cancel
+        {{ t('common.cancel') }}
       </el-button>
       <el-button
         type="primary"
         @click="handleSubmit"
       >
-        Save
+        {{ t('common.save') }}
       </el-button>
     </template>
   </el-dialog>
@@ -53,9 +53,12 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { FormInstance, FormRules } from 'element-plus'
 import { useFolderStore } from '../../stores'
 import { ElMessage } from 'element-plus'
+
+const { t } = useI18n()
 
 interface Props {
   modelValue: boolean
@@ -75,7 +78,7 @@ const { updateFolder } = folderStore
 
 const dialogVisible = computed({
   get: () => props.modelValue,
-  set: (value) => emit('update:modelValue', value)
+  set: value => emit('update:modelValue', value)
 })
 
 const formRef = ref<FormInstance>()
@@ -141,15 +144,18 @@ const handleClose = () => {
   dialogVisible.value = false
 }
 
-watch(() => props.folder, (newFolder) => {
-  if (newFolder) {
-    form.value = {
-      name: newFolder.name,
-      color: newFolder.color || '#3B82F6',
-      id: newFolder.id
+watch(
+  () => props.folder,
+  newFolder => {
+    if (newFolder) {
+      form.value = {
+        name: newFolder.name,
+        color: newFolder.color || '#3B82F6',
+        id: newFolder.id
+      }
     }
   }
-})
+)
 </script>
 
 <style scoped>

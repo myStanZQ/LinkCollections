@@ -2,8 +2,11 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { Settings } from '../types'
 import { ElMessage } from 'element-plus'
+import { useI18n } from 'vue-i18n'
+import { setLanguage } from '../i18n'
 
 export const useUIStore = defineStore('ui', () => {
+  const { t } = useI18n()
   const sidebarCollapsed = ref(false)
   const viewMode = ref<'card' | 'list'>('card')
   const currentView = ref<'bookmarks' | 'stats' | 'settings'>('bookmarks')
@@ -40,6 +43,7 @@ export const useUIStore = defineStore('ui', () => {
 
   const applyLanguage = (language: string) => {
     document.documentElement.lang = language
+    setLanguage(language as 'en' | 'zh')
   }
 
   const fetchSettings = async () => {
@@ -52,7 +56,7 @@ export const useUIStore = defineStore('ui', () => {
         applyLanguage(settings.value.language || 'en')
       }
     } catch (error) {
-      ElMessage.error('Failed to load settings')
+      ElMessage.error(t('message.settingsLoadFailed'))
       console.error(error)
     }
   }
@@ -79,7 +83,7 @@ export const useUIStore = defineStore('ui', () => {
       applyTheme(settings.value.theme)
     } catch (error) {
       if (showError) {
-        ElMessage.error('Failed to save settings')
+        ElMessage.error(t('message.settingsSaveFailed'))
       }
       console.error(error)
       throw error

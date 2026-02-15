@@ -6,7 +6,7 @@
     <el-input
       ref="searchInput"
       v-model="searchQuery"
-      placeholder="Search bookmarks..."
+      :placeholder="t('search.placeholder')"
       :prefix-icon="Search"
       clearable
       @input="handleSearch"
@@ -15,7 +15,7 @@
     >
       <template #append>
         <el-tooltip
-          content="Ctrl+K"
+          :content="t('search.searchShortcut')"
           placement="top"
         >
           <span class="shortcut-hint">⌘K</span>
@@ -27,9 +27,12 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { Search } from '@element-plus/icons-vue'
 import { useSearchStore } from '../../stores/search'
+
+const { t } = useI18n()
 
 const searchStore = useSearchStore()
 const { isSearching } = storeToRefs(searchStore)

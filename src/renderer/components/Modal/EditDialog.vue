@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     v-model="dialogVisible"
-    title="Edit Bookmark"
+    :title="t('dialog.editBookmark')"
     width="500px"
   >
     <el-form
@@ -9,11 +9,11 @@
       :model="form"
       label-width="80px"
     >
-      <el-form-item label="Title">
+      <el-form-item :label="t('form.title')">
         <el-input v-model="form.title" />
       </el-form-item>
 
-      <el-form-item label="Description">
+      <el-form-item :label="t('form.description')">
         <el-input
           v-model="form.description"
           type="textarea"
@@ -21,7 +21,7 @@
         />
       </el-form-item>
 
-      <el-form-item label="Folder">
+      <el-form-item :label="t('form.folder')">
         <el-select
           v-model="form.folderId"
           style="width: 100%"
@@ -35,7 +35,7 @@
         </el-select>
       </el-form-item>
 
-      <el-form-item label="Tags">
+      <el-form-item :label="t('form.tags')">
         <el-select
           v-model="form.tags"
           multiple
@@ -50,20 +50,20 @@
         </el-select>
       </el-form-item>
 
-      <el-form-item label="Color">
+      <el-form-item :label="t('form.color')">
         <el-color-picker v-model="form.color" />
       </el-form-item>
     </el-form>
 
     <template #footer>
       <el-button @click="handleClose">
-        Cancel
+        {{ t('common.cancel') }}
       </el-button>
       <el-button
         type="primary"
         @click="handleSubmit"
       >
-        Save
+        {{ t('common.save') }}
       </el-button>
     </template>
   </el-dialog>
@@ -71,9 +71,12 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { FormInstance } from 'element-plus'
 import { storeToRefs } from 'pinia'
 import { useBookmarkStore, useFolderStore, useTagStore } from '../../stores'
+
+const { t } = useI18n()
 
 interface Props {
   modelValue: boolean

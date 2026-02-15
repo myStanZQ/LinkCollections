@@ -2,7 +2,7 @@
   <div class="header">
     <div class="header-left">
       <h1 class="title">
-        {{ currentFolder?.name || 'All Bookmarks' }}
+        {{ currentFolder?.name || t('sidebar.allBookmarks') }}
       </h1>
     </div>
 
@@ -17,7 +17,7 @@
         @click="showAddDialog = true"
       >
         <i class="i-heroicons-plus" />
-        Add Bookmark
+        {{ t('bookmark.addBookmark') }}
       </el-button>
       <ViewToggle />
     </div>
@@ -28,6 +28,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { useFolderStore } from '../../stores'
 import SearchBox from '../Search/SearchBox.vue'
@@ -38,6 +39,7 @@ interface Emits {
   (e: 'search', query: string): void
 }
 
+const { t } = useI18n()
 const props = defineProps<{}>()
 const emit = defineEmits<Emits>()
 

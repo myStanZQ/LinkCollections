@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     v-model="dialogVisible"
-    title="Add Tag"
+    :title="t('dialog.addTag')"
     width="400px"
     @close="handleClose"
   >
@@ -12,17 +12,17 @@
       label-width="80px"
     >
       <el-form-item
-        label="Name"
+        :label="t('form.tagName')"
         prop="name"
       >
         <el-input
           v-model="form.name"
-          placeholder="Enter tag name"
+          :placeholder="t('form.placeholder.tagName')"
           @keyup.enter="handleSubmit"
         />
       </el-form-item>
       <el-form-item
-        label="Color"
+        :label="t('form.tagColor')"
         prop="color"
       >
         <div class="color-picker-wrapper">
@@ -34,7 +34,7 @@
           <el-input
             v-model="form.color"
             placeholder="#3B82F6"
-            style="width: 120px; margin-left: 12px;"
+            style="width: 120px; margin-left: 12px"
           />
         </div>
       </el-form-item>
@@ -42,13 +42,13 @@
 
     <template #footer>
       <el-button @click="handleClose">
-        Cancel
+        {{ t('common.cancel') }}
       </el-button>
       <el-button
         type="primary"
         @click="handleSubmit"
       >
-        Add Tag
+        {{ t('common.add') }}
       </el-button>
     </template>
   </el-dialog>
@@ -56,8 +56,11 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { FormInstance, FormRules } from 'element-plus'
 import { useTagStore } from '../../stores'
+
+const { t } = useI18n()
 
 interface Props {
   modelValue: boolean
@@ -75,7 +78,7 @@ const { addTag } = tagStore
 
 const dialogVisible = computed({
   get: () => props.modelValue,
-  set: (value) => emit('update:modelValue', value)
+  set: value => emit('update:modelValue', value)
 })
 
 const formRef = ref<FormInstance>()
@@ -100,9 +103,7 @@ const rules: FormRules = {
     { required: true, message: 'Please enter tag name', trigger: 'blur' },
     { min: 1, max: 30, message: 'Name should be 1-30 characters', trigger: 'blur' }
   ],
-  color: [
-    { required: true, message: 'Please select color', trigger: 'blur' }
-  ]
+  color: [{ required: true, message: 'Please select color', trigger: 'blur' }]
 }
 
 const handleSubmit = async () => {
@@ -124,14 +125,17 @@ const handleClose = () => {
   dialogVisible.value = false
 }
 
-watch(() => props.modelValue, (visible) => {
-  if (visible) {
-    setTimeout(() => {
-      const input = document.querySelector('.el-input__inner') as HTMLInputElement
-      input?.focus()
-    }, 100)
+watch(
+  () => props.modelValue,
+  visible => {
+    if (visible) {
+      setTimeout(() => {
+        const input = document.querySelector('.el-input__inner') as HTMLInputElement
+        input?.focus()
+      }, 100)
+    }
   }
-})
+)
 </script>
 
 <style scoped>

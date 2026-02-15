@@ -2,7 +2,7 @@
   <div class="tag-list">
     <div class="tag-list-header">
       <h3 class="text-sm font-semibold text-gray-600">
-        Tags
+        {{ t('sidebar.tags') }}
       </h3>
       <el-button
         size="small"
@@ -50,14 +50,14 @@
           @click="handleTagAction('edit', contextMenuTag.id)"
         >
           <i class="i-heroicons-pencil" />
-          <span>Edit</span>
+          <span>{{ t('common.edit') }}</span>
         </div>
         <div
           class="context-menu-item"
           @click="handleTagAction('delete', contextMenuTag.id)"
         >
           <i class="i-heroicons-trash" />
-          <span>Delete</span>
+          <span>{{ t('common.delete') }}</span>
         </div>
       </div>
     </teleport>
@@ -67,15 +67,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
+import { useI18n } from 'vue-i18n'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { useTagStore, useUIStore } from '../../stores'
-import { ElMessageBox } from 'element-plus'
 import AddTagDialog from '../Modal/AddTagDialog.vue'
 import EditTagDialog from '../Modal/EditTagDialog.vue'
 
+const { t } = useI18n()
 const tagStore = useTagStore()
 const uiStore = useUIStore()
 const { tags, selectedTagIds } = storeToRefs(tagStore)
-const { toggleTag, updateTag, deleteTag, addTag } = tagStore
+const { toggleTag, updateTag, deleteTag } = tagStore
 const { setCurrentView } = uiStore
 
 const showAddTagDialog = ref(false)
@@ -110,19 +112,15 @@ const handleTagAction = async (command: string, id: string) => {
     return
   }
 
-   if (command === 'delete') {
+  if (command === 'delete') {
     hideContextMenu()
 
     try {
-      await ElMessageBox.confirm(
-        'Are you sure you want to delete this tag?',
-        'Confirm Delete',
-        {
-          confirmButtonText: 'Delete',
-          cancelButtonText: 'Cancel',
-          type: 'warning'
-        }
-      )
+      await ElMessageBox.confirm('Are you sure you want to delete this tag?', 'Confirm Delete', {
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Cancel',
+        type: 'warning'
+      })
       await deleteTag(id)
     } catch {
       // User cancelled
@@ -136,7 +134,7 @@ const handleTagUpdate = async (updates: any) => {
       await updateTag(editingTag.value.id, updates)
       showEditTagDialog.value = false
     } catch (error) {
-      ElMessage.error('Failed to update tag')
+      ElMessage.error(t('message.tagAddFailed'))
     }
   }
 }
@@ -146,7 +144,6 @@ const hideContextMenu = () => {
 }
 
 document.addEventListener('click', hideContextMenu)
-
 </script>
 
 <style scoped>

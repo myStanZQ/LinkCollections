@@ -2,8 +2,10 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { Bookmark } from '../types'
 import { ElMessage } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 
 export const useBookmarkStore = defineStore('bookmark', () => {
+  const { t } = useI18n()
   const bookmarks = ref<Bookmark[]>([])
   const loading = ref(false)
 
@@ -12,7 +14,7 @@ export const useBookmarkStore = defineStore('bookmark', () => {
       loading.value = true
       bookmarks.value = await window.electronAPI.getBookmarks()
     } catch (error) {
-      ElMessage.error('Failed to load bookmarks')
+      ElMessage.error(t('message.bookmarkLoadFailed'))
       console.error(error)
     } finally {
       loading.value = false
@@ -32,10 +34,10 @@ export const useBookmarkStore = defineStore('bookmark', () => {
       }
       const newBookmark = await window.electronAPI.addBookmark(bookmarkData)
       bookmarks.value.push(newBookmark)
-      ElMessage.success('Bookmark added successfully')
+      ElMessage.success(t('message.bookmarkAdded'))
       return newBookmark
     } catch (error) {
-      ElMessage.error('Failed to add bookmark')
+      ElMessage.error(t('message.bookmarkAddFailed'))
       console.error(error)
       throw error
     }
@@ -70,12 +72,12 @@ export const useBookmarkStore = defineStore('bookmark', () => {
         bookmarks.value[index] = updated
       }
       if (showMessage) {
-        ElMessage.success('Bookmark updated successfully')
+        ElMessage.success(t('message.bookmarkUpdated'))
       }
       return updated
     } catch (error) {
       if (showMessage) {
-        ElMessage.error('Failed to update bookmark')
+        ElMessage.error(t('message.bookmarkUpdateFailed'))
       }
       console.error(error)
       throw error
@@ -86,9 +88,9 @@ export const useBookmarkStore = defineStore('bookmark', () => {
     try {
       await window.electronAPI.deleteBookmark(id)
       bookmarks.value = bookmarks.value.filter(b => b.id !== id)
-      ElMessage.success('Bookmark deleted successfully')
+      ElMessage.success(t('message.bookmarkDeleted'))
     } catch (error) {
-      ElMessage.error('Failed to delete bookmark')
+      ElMessage.error(t('message.bookmarkDeleteFailed'))
       console.error(error)
       throw error
     }
@@ -113,10 +115,10 @@ export const useBookmarkStore = defineStore('bookmark', () => {
       if (api && typeof api.clearAllBookmarks === 'function') {
         await api.clearAllBookmarks()
         bookmarks.value = []
-        ElMessage.success('All bookmarks cleared')
+        ElMessage.success(t('message.allCleared'))
       }
     } catch (error) {
-      ElMessage.error('Failed to clear bookmarks')
+      ElMessage.error(t('message.bookmarkDeleteFailed'))
       throw error
     }
   }

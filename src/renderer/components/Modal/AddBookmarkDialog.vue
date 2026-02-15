@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     v-model="dialogVisible"
-    title="Add Bookmark"
+    :title="t('dialog.addBookmark')"
     width="500px"
     @close="handleClose"
   >
@@ -12,12 +12,12 @@
       label-width="80px"
     >
       <el-form-item
-        label="URL"
+        :label="t('form.url')"
         prop="url"
       >
         <el-input
           v-model="form.url"
-          placeholder="https://example.com"
+          :placeholder="t('form.placeholder.url')"
           @blur="fetchUrlMetadata"
         >
           <template #append>
@@ -32,34 +32,34 @@
       </el-form-item>
 
       <el-form-item
-        label="Title"
+        :label="t('form.title')"
         prop="title"
       >
         <el-input
           v-model="form.title"
-          placeholder="Bookmark title"
+          :placeholder="t('form.placeholder.title')"
         />
       </el-form-item>
 
       <el-form-item
-        label="Description"
+        :label="t('form.description')"
         prop="description"
       >
         <el-input
           v-model="form.description"
           type="textarea"
           :rows="3"
-          placeholder="Brief description"
+          :placeholder="t('form.placeholder.description')"
         />
       </el-form-item>
 
       <el-form-item
-        label="Folder"
+        :label="t('form.folder')"
         prop="folderId"
       >
         <el-select
           v-model="form.folderId"
-          placeholder="Select folder"
+          :placeholder="t('form.selectFolder')"
           style="width: 100%"
         >
           <el-option
@@ -72,13 +72,13 @@
       </el-form-item>
 
       <el-form-item
-        label="Tags"
+        :label="t('form.tags')"
         prop="tags"
       >
         <el-select
           v-model="form.tags"
           multiple
-          placeholder="Select tags"
+          :placeholder="t('form.selectTags')"
           style="width: 100%"
         >
           <el-option
@@ -99,7 +99,7 @@
       </el-form-item>
 
       <el-form-item
-        label="Color"
+        :label="t('form.color')"
         prop="color"
       >
         <div class="color-picker-wrapper">
@@ -118,14 +118,14 @@
 
     <template #footer>
       <el-button @click="handleClose">
-        Cancel
+        {{ t('common.cancel') }}
       </el-button>
       <el-button
         type="primary"
         :loading="submitting"
         @click="handleSubmit"
       >
-        Add Bookmark
+        {{ t('common.add') }}
       </el-button>
     </template>
   </el-dialog>
@@ -133,11 +133,14 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import type { FormInstance, FormRules } from 'element-plus'
 import { useBookmarkStore, useFolderStore, useTagStore, useUIStore } from '../../stores'
 import { validateBookmarkData } from '../../utils/validation'
 import { getFaviconUrl, shouldFetchFavicon } from '../../utils/favicon'
+
+const { t } = useI18n()
 
 interface Props {
   modelValue: boolean

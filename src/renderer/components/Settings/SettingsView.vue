@@ -1,22 +1,22 @@
 <template>
   <div class="settings-view">
     <h1 class="settings-title">
-      Settings
+      {{ t('settings.title') }}
     </h1>
 
     <div class="settings-sections">
       <div class="settings-section">
         <h2 class="section-title">
           <i class="i-heroicons-paint-brush" />
-          Appearance
+          {{ t('settings.appearance') }}
         </h2>
         <div class="settings-item">
           <div class="settings-item-content">
             <div class="settings-item-label">
-              Theme
+              {{ t('settings.theme') }}
             </div>
             <div class="settings-item-description">
-              Choose your preferred theme
+              {{ t('settings.chooseTheme') }}
             </div>
           </div>
           <el-radio-group
@@ -24,34 +24,34 @@
             @change="handleThemeChange"
           >
             <el-radio-button value="light">
-              Light
+              {{ t('settings.themeLight') }}
             </el-radio-button>
             <el-radio-button value="dark">
-              Dark
+              {{ t('settings.themeDark') }}
             </el-radio-button>
           </el-radio-group>
         </div>
         <div class="settings-item">
           <div class="settings-item-content">
             <div class="settings-item-label">
-              Language
+              {{ t('settings.language') }}
             </div>
             <div class="settings-item-description">
-              Choose your preferred language
+              {{ t('settings.chooseLanguage') }}
             </div>
           </div>
           <el-select
             v-model="localSettings.language"
-            placeholder="Select language"
+            :placeholder="t('settings.language')"
             style="width: 180px"
             @change="handleLanguageChange"
           >
             <el-option
-              label="English"
+              :label="t('settings.languageEn')"
               value="en"
             />
             <el-option
-              label="中文"
+              :label="t('settings.languageZh')"
               value="zh"
             />
           </el-select>
@@ -61,15 +61,15 @@
       <div class="settings-section">
         <h2 class="section-title">
           <i class="i-heroicons-globe-alt" />
-          Browser
+          {{ t('settings.browser') }}
         </h2>
         <div class="settings-item">
           <div class="settings-item-content">
             <div class="settings-item-label">
-              Default Browser
+              {{ t('settings.defaultBrowser') }}
             </div>
             <div class="settings-item-description">
-              Primary browser for opening links
+              {{ t('settings.primaryBrowser') }}
             </div>
           </div>
           <div
@@ -78,12 +78,12 @@
           >
             <el-input
               v-model="defaultBrowserName"
-              placeholder="Browser name"
+              :placeholder="t('settings.browserName')"
               style="flex: 1"
             />
             <el-input
               v-model="defaultBrowserPath"
-              placeholder="C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+              :placeholder="t('settings.browserPath')"
               style="flex: 2"
               @change="handleBrowserChange"
             />
@@ -92,10 +92,10 @@
         <div class="settings-item">
           <div class="settings-item-content">
             <div class="settings-item-label">
-              Available Browsers
+              {{ t('settings.availableBrowsers') }}
             </div>
             <div class="settings-item-description">
-              Additional browsers to choose from
+              {{ t('settings.additionalBrowsers') }}
             </div>
           </div>
           <div class="browser-list">
@@ -107,12 +107,12 @@
               <div class="browser-inputs">
                 <el-input
                   v-model="browser.name"
-                  placeholder="Browser name"
+                  :placeholder="t('settings.browserName')"
                   style="flex: 1"
                 />
                 <el-input
                   v-model="browser.path"
-                  placeholder="Browser path"
+                  :placeholder="t('settings.browserPath')"
                   style="flex: 2"
                 />
               </div>
@@ -130,7 +130,7 @@
               @click="addBrowser"
             >
               <i class="i-heroicons-plus" />
-              Add Browser
+              {{ t('settings.addBrowser') }}
             </el-button>
           </div>
         </div>
@@ -139,15 +139,15 @@
       <div class="settings-section">
         <h2 class="section-title">
           <i class="i-heroicons-cog-6-tooth" />
-          General
+          {{ t('settings.general') }}
         </h2>
         <div class="settings-item">
           <div class="settings-item-content">
             <div class="settings-item-label">
-              Auto-fetch Favicon
+              {{ t('settings.autoFetchFavicon') }}
             </div>
             <div class="settings-item-description">
-              Automatically fetch website icons when adding bookmarks
+              {{ t('settings.autoFetchFaviconDesc') }}
             </div>
           </div>
           <el-switch
@@ -160,15 +160,15 @@
       <div class="settings-section">
         <h2 class="section-title">
           <i class="i-heroicons-information-circle" />
-          About
+          {{ t('settings.about') }}
         </h2>
         <div class="settings-item">
           <div class="settings-item-content">
             <div class="settings-item-label">
-              LinkCollection
+              {{ t('app.name') }}
             </div>
             <div class="settings-item-description">
-              Version 1.0.0
+              {{ t('app.version') }}
             </div>
           </div>
         </div>
@@ -179,22 +179,22 @@
       <div class="settings-section">
         <h2 class="section-title">
           <i class="i-heroicons-trash" />
-          Data Management
+          {{ t('settings.dataManagement') }}
         </h2>
         <div class="settings-item">
           <div class="settings-item-content">
             <div class="settings-item-label">
-              Clear All Data
+              {{ t('settings.clearAllData') }}
             </div>
             <div class="settings-item-description">
-              Delete all bookmarks, folders, and tags
+              {{ t('settings.clearAllDataDesc') }}
             </div>
           </div>
           <el-button
             type="danger"
             @click="clearAllData"
           >
-            Clear All
+            {{ t('settings.clearAll') }}
           </el-button>
         </div>
       </div>
@@ -202,13 +202,13 @@
 
     <div class="settings-footer">
       <el-button @click="resetToDefaults">
-        Reset to Defaults
+        {{ t('settings.resetToDefaults') }}
       </el-button>
       <el-button
         type="primary"
         @click="saveSettings"
       >
-        Save Settings
+        {{ t('common.save') }}
       </el-button>
     </div>
   </div>
@@ -216,12 +216,14 @@
 
 <script setup lang="ts">
 import { ref, watch, onMounted, onActivated } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { storeToRefs } from 'pinia'
 import { useUIStore, useBookmarkStore, useFolderStore, useTagStore } from '../../stores'
 import type { Settings } from '../../types'
 import ImportExport from './ImportExport.vue'
 
+const { t } = useI18n()
 const uiStore = useUIStore()
 const bookmarkStore = useBookmarkStore()
 const folderStore = useFolderStore()
@@ -293,7 +295,7 @@ const handleThemeChange = (value: string) => {
   applyTheme(value)
 }
 
-const handleBrowserChange = (value: string) => {}
+const handleBrowserChange = (_value: string) => {}
 
 const normalizePath = (path: string): string => {
   if (!path) return ''
@@ -347,15 +349,15 @@ const saveSettings = async () => {
     const savedSettings = await window.electronAPI.updateSettings(settingsToSave)
     settings.value = savedSettings
 
-    ElMessage.success('Settings saved successfully')
+    ElMessage.success(t('settings.saved'))
   } catch (error) {
-    ElMessage.error('Failed to save settings')
+    ElMessage.error(t('message.settingsSaveFailed'))
   } finally {
     isSaving = false
   }
 }
 
-const handleAutoFetchChange = (value: boolean) => {}
+const handleAutoFetchChange = (_value: boolean) => {}
 
 const handleLanguageChange = (value: string) => {
   applyLanguage(value)
@@ -366,9 +368,11 @@ const applyTheme = (theme: string) => {
   document.documentElement.classList.add(theme)
 }
 
-const applyLanguage = (language: string) => {
+const applyLanguage = async (language: string) => {
   document.documentElement.lang = language
   localStorage.setItem('app-language', language)
+  const { setLanguage } = await import('../../i18n')
+  setLanguage(language as 'en' | 'zh')
 }
 
 const resetToDefaults = async () => {
@@ -376,33 +380,29 @@ const resetToDefaults = async () => {
     localSettings.value = { ...defaultSettings }
     await saveSettingsToStore()
     applyTheme('light')
-    ElMessage.success('Settings reset to defaults')
+    ElMessage.success(t('settings.resetSuccess'))
   } catch (error) {
-    ElMessage.error('Failed to reset settings')
+    ElMessage.error(t('message.settingsSaveFailed'))
     console.error(error)
   }
 }
 
 const clearAllData = async () => {
   try {
-    await ElMessageBox.confirm(
-      'This will permanently delete all bookmarks, folders, and tags. This action cannot be undone.',
-      'Warning',
-      {
-        confirmButtonText: 'Delete All',
-        cancelButtonText: 'Cancel',
-        type: 'warning',
-        confirmButtonClass: 'el-button--danger'
-      }
-    )
+    await ElMessageBox.confirm(t('dialog.confirmClearAll'), t('dialog.deleteWarning'), {
+      confirmButtonText: t('settings.clearAll'),
+      cancelButtonText: t('common.cancel'),
+      type: 'warning',
+      confirmButtonClass: 'el-button--danger'
+    })
 
     await bookmarkStore.clearAllBookmarks()
     await folderStore.clearAllFolders()
     await tagStore.clearAllTags()
-    ElMessage.success('All data cleared successfully')
+    ElMessage.success(t('settings.clearSuccess'))
   } catch (error) {
     if (error !== 'cancel') {
-      ElMessage.error('Failed to clear data')
+      ElMessage.error(t('settings.clearFailed'))
     }
   }
 }

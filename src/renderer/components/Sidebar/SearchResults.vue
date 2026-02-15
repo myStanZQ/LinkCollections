@@ -8,7 +8,7 @@
       class="no-results"
     >
       <i class="i-heroicons-magnifying-glass" />
-      <p>No bookmarks found</p>
+      <p>{{ t('search.noResults') }}</p>
     </div>
 
     <div
@@ -16,13 +16,14 @@
       class="results-list"
     >
       <div class="results-header">
-        <span>{{ searchResults.length }} result{{ searchResults.length !== 1 ? 's' : '' }}</span>
+        <span>{{ searchResults.length }}
+          {{ searchResults.length !== 1 ? t('search.results') : '' }}</span>
         <el-button
           text
           size="small"
           @click="handleClear"
         >
-          Clear
+          {{ t('common.cancel') }}
         </el-button>
       </div>
 
@@ -65,13 +66,13 @@
       class="search-history"
     >
       <div class="history-header">
-        <span>Recent searches</span>
+        <span>{{ t('search.recentSearches') || 'Recent searches' }}</span>
         <el-button
           text
           size="small"
           @click="handleClearHistory"
         >
-          Clear all
+          {{ t('common.cancel') }}
         </el-button>
       </div>
 
@@ -98,10 +99,12 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import { useI18n } from 'vue-i18n'
 import { useSearchStore } from '../../stores/search'
 import { useBookmarkStore } from '../../stores'
 import type { Bookmark } from '../../types'
 
+const { t } = useI18n()
 const searchStore = useSearchStore()
 const bookmarkStore = useBookmarkStore()
 const { isSearching, searchResults, searchHistory } = storeToRefs(searchStore)

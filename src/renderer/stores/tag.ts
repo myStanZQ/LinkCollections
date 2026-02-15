@@ -2,8 +2,10 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { Tag } from '../types'
 import { ElMessage } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 
 export const useTagStore = defineStore('tag', () => {
+  const { t } = useI18n()
   const tags = ref<Tag[]>([])
   const selectedTagIds = ref<string[]>([])
   const loading = ref(false)
@@ -13,7 +15,7 @@ export const useTagStore = defineStore('tag', () => {
       loading.value = true
       tags.value = await window.electronAPI.getTags()
     } catch (error) {
-      ElMessage.error('Failed to load tags')
+      ElMessage.error(t('message.tagLoadFailed'))
       console.error(error)
     } finally {
       loading.value = false
@@ -28,10 +30,10 @@ export const useTagStore = defineStore('tag', () => {
       }
       const newTag = await window.electronAPI.addTag(tagData)
       tags.value.push(newTag)
-      ElMessage.success('Tag added successfully')
+      ElMessage.success(t('message.tagAdded'))
       return newTag
     } catch (error) {
-      ElMessage.error('Failed to add tag')
+      ElMessage.error(t('message.tagAddFailed'))
       console.error(error)
       throw error
     }
@@ -42,9 +44,9 @@ export const useTagStore = defineStore('tag', () => {
       await window.electronAPI.deleteTag(id)
       tags.value = tags.value.filter(t => t.id !== id)
       selectedTagIds.value = selectedTagIds.value.filter(tagId => tagId !== id)
-      ElMessage.success('Tag deleted successfully')
+      ElMessage.success(t('message.tagDeleted'))
     } catch (error) {
-      ElMessage.error('Failed to delete tag')
+      ElMessage.error(t('message.tagDeleteFailed'))
       console.error(error)
       throw error
     }
@@ -70,9 +72,9 @@ export const useTagStore = defineStore('tag', () => {
       if (index > -1) {
         tags.value[index] = updatedTag
       }
-      ElMessage.success('Tag updated successfully')
+      ElMessage.success(t('message.tagUpdated'))
     } catch (error) {
-      ElMessage.error('Failed to update tag')
+      ElMessage.error(t('message.tagAddFailed'))
       console.error(error)
       throw error
     }
@@ -87,9 +89,9 @@ export const useTagStore = defineStore('tag', () => {
       await window.electronAPI.clearAllTags()
       tags.value = []
       selectedTagIds.value = []
-      ElMessage.success('All tags cleared')
+      ElMessage.success(t('message.allCleared'))
     } catch (error) {
-      ElMessage.error('Failed to clear tags')
+      ElMessage.error(t('message.tagDeleteFailed'))
       throw error
     }
   }
