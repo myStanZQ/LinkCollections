@@ -174,3 +174,6 @@ data/
 *.sqlite3
 # BitFun snapshot data - auto managed
 .bitfun/
+
+# OpenCode
+AGENTS.md
